@@ -82,16 +82,33 @@ https://benhoyt.com/writings/duplicate-image-detection/
 
 #### 2. Detect food vs. no food
 
-Here we put our first Image Classification model. This is a binary classifier model trained via AutoML. 
+Here we use our first image classification model. This is a binary classifier model trained via AutoML. 
+We expect that by separating this model out from category classification, we can improve accuracy of the category classification. 
+
+We don't continue the process if the picture does not feature food.
 
 #### 3. Category classification
+
+Here we use our second image classification model. We will start with some of the popular dining categories in our app, like "Japanese", "Chinese", "Indian", "Thai", "Western", "Italian", as well as more specific food types like "Pizza", "Salads", "Ramen", "Steak", "Fried Chicken".
 
 ![Sample Photo](./SamplePhoto.png)
 
 #### 4. Extract EXIF
+We can obtain
+- timestamp when photo was taken
+- GPS information when photo was taken
+
+from the photos in the photo library. (for most of the devices, at least)
 
 #### 5. Storing the data in SQLite via Room
 
+Each photo that was recognized as food, will be stored in the SQLite DB with 
+
+- label
+- timestamp (if available)
+- location (if available)
+
+These information will be used to make recommendation later when `OmakaseInterface.recommend(...)` is called.
 
 
 
